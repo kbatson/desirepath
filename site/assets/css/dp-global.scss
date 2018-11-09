@@ -202,32 +202,8 @@ header nav {
 }
 
 main {
-    grid-row: 1 / span 3;
+    grid-row: 1 / span 4;
     grid-column: 2;
-}
-
-article {
-    display: grid;
-    grid-template-rows: 9rem 3rem auto;
-    grid-template-columns: 1fr 1fr 7fr 1fr;
-    grid-gap: 1rem;
-}
-
-.blogHeader {
-    grid-row: 1 / span 2;
-    grid-column: 1 / span 4;
-
-    display: grid;
-    grid-template-rows: 3rem 4rem 3rem auto;
-    grid-template-columns: 1fr 1fr 7fr 1fr;
-    grid-gap: 1rem;
-
-    border-top: 1rem solid darken($grey, 10%);
-    background: url(../images/dp-header-trees.svg);
-    background-repeat: no-repeat;
-    background-position: top right;
-    background-size: 600px 140px;
-
     position: relative;
 
     &:before {
@@ -241,6 +217,29 @@ article {
         z-index: -1;
         @include contour(dark, grey);
     }
+}
+
+article {
+    display: grid;
+    grid-template-rows: 9rem 3rem auto;
+    grid-template-columns: 1fr 1fr 7fr 1fr;
+    grid-gap: 1rem;
+}
+
+.blogHeader {
+    grid-row: 1 / span 3;
+    grid-column: 1 / span 4;
+
+    display: grid;
+    grid-template-rows: 3rem 4rem 3rem auto;
+    grid-template-columns: 1fr 1fr 7fr 1fr;
+    grid-gap: 1rem;
+
+    border-top: 1rem solid darken($grey, 10%);
+    background: url(../images/dp-header-trees.svg);
+    background-repeat: no-repeat;
+    background-position: right 1rem;
+    background-size: 600px 140px;
 }
 
 .blogHeader h1 {
@@ -334,40 +333,60 @@ aside {
 
     padding: 1rem;
 
-    color: $tan;
-
     position: relative;
 
-    &:after {
-        content: "";
-        display: block;
-        height: 100%;
-        width: 100%;
-        position: absolute;
-        top: 0;
-        left: 0;
-        z-index: -1;
+    // &:after {
+    //     content: "";
+    //     display: block;
+    //     height: 100%;
+    //     width: 100%;
+    //     position: absolute;
+    //     top: 0;
+    //     left: 0;
+    //     z-index: -1;
 
-        @include contour(dark, grey);
-    }
+    //     @include contour(dark, grey);
+    // }
 
     #readingList {
+        text-align: right;
+
         h3 {
             font-family: freight-sans-pro, sans-serif;
             letter-spacing: .1em;
             text-transform: uppercase;
-            text-align: right;
             font-size: 1rem;
 
-            color: $yellow;
+            color: $red;
+        }
+
+        dl {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+
+            font-size: .9rem;
+            line-height: 1.5em;
+
+            dt {
+                padding: 0;
+                margin: 0;
+                font-weight: 600;
+            }
+
+            dd {
+                padding: 0;
+                margin: 0 0 1.5rem 0;
+            }
         }
     }
 
 }
 
 footer {
-    grid-row: -1;
+    grid-row: -2;
     grid-column: 2 / -1;
+    z-index: 1;
 
     display: grid;
     grid-template-columns: 1fr 1fr 7fr 1fr;
