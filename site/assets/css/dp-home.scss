@@ -2,52 +2,20 @@
 ---
 @import "dp-global";
 
-body {
-    position: relative;
-}
-body:before {
-    content: "";
-    display: block;
-    height: 100%;
-    width: 100vw;
-    position: absolute;
-    top: 0;
-    left: 0;
-    background-image: url(../images/contour-grey-dark.svg);
-    filter: brightness(3.5) hue-rotate(-45deg) saturate(0);
-}
-
 .contour {
     height: 100px;
     width: 300px;
     background-size: 800px 450px;
 
-    &.light {
-        background-image: url(../images/contour-grey-light.svg);
-    }
-
-    &.dark {
-        background-image: url(../images/contour-grey-dark.svg);
-    }
-
-    &.red {
-        filter: brightness(0.8) sepia(1) hue-rotate(-45deg) saturate(3.5);
-    }
-
-    &.yellow {
-        filter: brightness(1.5) sepia(1) hue-rotate(-15deg) saturate(3);
-    }
-
-    &.brown {
-        filter: brightness(0.8) sepia(1) hue-rotate(-25deg) saturate(2.5);
-    }
-
-    &.tan {
-        filter: brightness(1.8) sepia(1) hue-rotate(-25deg) saturate(1.8);
-    }
-
-    &.white {
-        background-image: url(../images/contour-grey-dark.svg);
-        filter: brightness(3.5) hue-rotate(-45deg) saturate(0);
-    }
+    &.red.light { @include contour(light, red); }
+    &.red.dark { @include contour(dark, red); }
+    &.yellow.light { @include contour(light, yellow); }
+    &.yellow.dark { @include contour(dark, yellow); }
+    &.brown.light { @include contour(light, brown); }
+    &.brown.dark { @include contour(dark, brown); }
+    &.tan.light { @include contour(light, tan); }
+    &.tan.dark { @include contour(dark, tan); }
+    &.grey.light { @include contour(light, grey); }
+    &.grey.dark { @include contour(dark, grey); }
+    &.white { @include contour(dark, white); }
 }
