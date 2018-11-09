@@ -7,14 +7,16 @@ $tan: rgb(226, 212, 187);
 @mixin contour($lightDark, $color) {
     @if($lightDark == dark) {
         background-image: url(../images/contour-lightgrey-dark.svg);
-        background-size: 1000px 650px;
+        // background-size: 1000px 650px;
+        background-size: 1200px 780px;
     }
     @if($lightDark == light) {
         background-image: url(../images/contour-lightgrey-light.svg);
-        background-size: 1000px 650px;
+        // background-size: 1000px 650px;
+        background-size: 1200px 780px;
     }
     @if($color == red) { filter: brightness(0.8) sepia(1) hue-rotate(-35deg) saturate(3.9); }
-    @if($color == yellow) { filter: brightness(1.2) sepia(1) hue-rotate(-12deg) saturate(3.2); }
+    @if($color == yellow) { filter: brightness(1.2) sepia(1) hue-rotate(-12deg) saturate(2.9); }
     @if($color == brown) { filter: brightness(0.5) sepia(1) hue-rotate(-30deg) saturate(2.5); }
     @if($color == tan) { filter: brightness(1.5) sepia(1) hue-rotate(-5deg) saturate(.8); }
     @if($color == grey) { filter: brightness(.6) sepia(1) saturate(.4) hue-rotate(-5deg) }
@@ -23,6 +25,7 @@ $tan: rgb(226, 212, 187);
 
 html, body {
     margin: 0;
+    color: $grey;
 }
 
 h1, h2, h3, h4, h5, h6 {
@@ -34,6 +37,8 @@ body {
     font-size: 18px;
     line-height: 1.5em;
     width: 100%;
+    height: 100%;
+    min-height: 100vh;
 
     font-family: freight-micro-pro, serif;
     font-weight: 400;
@@ -41,7 +46,7 @@ body {
 
     display: grid;
     grid-template-columns: 3fr 10fr;
-    grid-template-rows: auto auto;
+    grid-template-rows: 33rem auto auto auto;
 }
 
 body:before {
@@ -116,10 +121,88 @@ header nav {
     grid-row: 2 / span 6;
 
     position: relative;
+
+    ul {
+        list-style: none;
+        margin: 0;
+        padding: 0;
+        height: 100%;
+
+        display: grid;
+        grid-template-columns: 0px repeat(3, 1fr) 0px;
+        grid-template-rows: repeat(6, 1fr);
+        grid-gap: 1rem;
+    }
+
+    li {
+        width: 9rem;
+        height: 2rem;
+
+        text-align: center;
+        font-family: freight-sans-pro, sans-serif;
+        text-transform: uppercase;
+        letter-spacing: .2em;
+        font-weight: 600;
+        font-size: .8rem;
+        line-height: 2rem;
+
+        background-image: linear-gradient(to right, $grey 20px, transparent 20px), linear-gradient(to right, $grey 20px, transparent 20px), linear-gradient(to bottom, $grey 20px, transparent 20px), linear-gradient(to bottom, $grey 20px, transparent 20px);
+        background-size: 100% 2px, 100% 2px, 2px 100%, 2px 100%;
+        background-position: -10px 0%, -10px 100%, 0% -10px, 100% -10px;
+        background-repeat: repeat-x, repeat-x, repeat-y, repeat-y;
+
+        &#navTravel {
+            grid-row: 2;
+            grid-column: 2 / span 2;
+        }
+
+        &#navLocations {
+            grid-row: 3;
+            grid-column: span 2 / -2;
+        }
+
+        &#navPhotos {
+            grid-row: 4;
+            grid-column: 2 / span 3;
+            justify-self: center;
+        }
+
+        &#navVan {
+            grid-row: 5;
+            grid-column: span 3 / -1;
+            justify-self: center;
+        }
+
+        a {
+            display: block;
+            height: 100%;
+            width: 100%;
+
+            color: #ffffff;
+            text-decoration: none;
+            line-height: inherit;
+
+            position: relative;
+
+            &:hover:after {
+                content: "";
+                display: block;
+                height: 100%;
+                width: 100%;
+
+                position: absolute;
+                top: 0;
+                left: 0;
+                z-index: -1;
+
+                @include contour(dark, red);
+            }
+        }
+    }
 }
 
 main {
-    grid-row: 1;
+    grid-row: 1 / span 3;
     grid-column: 2;
 }
 
@@ -133,9 +216,19 @@ article {
 .blogHeader {
     grid-row: 1 / span 2;
     grid-column: 1 / span 4;
-    position: relative;
+
+    display: grid;
+    grid-template-rows: 3rem 4rem 3rem auto;
+    grid-template-columns: 1fr 1fr 7fr 1fr;
+    grid-gap: 1rem;
 
     border-top: 1rem solid darken($grey, 10%);
+    background: url(../images/dp-header-trees.svg);
+    background-repeat: no-repeat;
+    background-position: top right;
+    background-size: 600px 140px;
+
+    position: relative;
 
     &:before {
         content: "";
@@ -151,18 +244,33 @@ article {
 }
 
 .blogHeader h1 {
+    grid-column: 2 / span 2;
+    grid-row: 1;
+
+    text-align: right;
+    align-self: end;
+
     font-family: freight-sans-pro;
+    font-size: 1rem;
     text-transform: uppercase;
     letter-spacing: .2em;
+
     color: $yellow;
 }
 
 .blogHeader h2 {
+    grid-column: 2 / span 2;
+    grid-row: 2;
+
+    font-size: 2rem;
+    line-height: 1em;
+    text-align: right;
+
     color: $tan;
 }
 
 .blogBody {
-    grid-row: 2 / span 3;
+    grid-row: 2 / span 2;
     grid-column: 2 / span 2;
 
     display: grid;
@@ -170,9 +278,27 @@ article {
     grid-gap: 1rem;
 
     margin: 0 -1rem;
-    padding: 0 1rem;
+    padding: 4rem 1rem 10vw 1rem;
 
     background: #ffffff;
+
+    position: relative;
+
+    &:after {
+        content: "";
+        display: block;
+        position: absolute;
+        height: 100%;
+        width: 100%;
+        bottom: 0;
+        right: -7vw;
+        z-index: 1;
+
+        background: url(../images/dp-footer-mountains.svg);
+        background-repeat: no-repeat;
+        background-position: bottom right;
+        background-size: 600px 140px;
+    }
 
     p {
         grid-column: 2;
@@ -190,8 +316,9 @@ article {
     .month {
         display: block;
         font-family: freight-sans-pro;
+        font-weight: 600;
         text-transform: uppercase;
-        letter-spacing: .2em;
+        letter-spacing: .1em;
     }
 
     .day {
@@ -202,6 +329,51 @@ article {
 }
 
 aside {
-    grid-column: 1 / span 4;
-    grid-row: 9 / span 4;
+    grid-column: 1;
+    grid-row: 2;
+
+    padding: 1rem;
+
+    color: $tan;
+
+    position: relative;
+
+    &:after {
+        content: "";
+        display: block;
+        height: 100%;
+        width: 100%;
+        position: absolute;
+        top: 0;
+        left: 0;
+        z-index: -1;
+
+        @include contour(dark, grey);
+    }
+
+    #readingList {
+        h3 {
+            font-family: freight-sans-pro, sans-serif;
+            letter-spacing: .1em;
+            text-transform: uppercase;
+            text-align: right;
+            font-size: 1rem;
+
+            color: $yellow;
+        }
+    }
+
+}
+
+footer {
+    grid-row: -1;
+    grid-column: 2 / -1;
+
+    display: grid;
+    grid-template-columns: 1fr 1fr 7fr 1fr;
+    grid-gap: 1rem;
+}
+
+#recentPosts {
+    grid-column: 3 / span 1;
 }
